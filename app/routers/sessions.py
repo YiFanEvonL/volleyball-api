@@ -19,7 +19,6 @@ router = APIRouter(prefix="/sessions", tags=["sessions"])
 
 @router.get("", response_model=list[SessionResponse])
 async def get_all_sessions(
-    current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """List all sessions with live confirmed/waitlist counts."""
@@ -29,7 +28,6 @@ async def get_all_sessions(
 @router.get("/{session_id}", response_model=SessionResponse)
 async def get_one_session(
     session_id: UUID,
-    current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """Get a single session's details and current player counts."""
